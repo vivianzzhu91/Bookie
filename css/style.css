@@ -1,0 +1,42 @@
+/* navbar */
+.navbar{
+    padding:12px;
+    font-size: 25px;
+    background-color:rgb(243, 235, 223);
+}
+.logo{
+    font-family: 'Cute Font', cursive;
+    font-size: 45px;
+}
+.nav-item{
+    font-family: 'Muli', sans-serif;
+}
+.searchBut{
+    color:white;
+    padding: 6px !important;
+    background-color:#E2C044;
+}
+input::-webkit-input-placeholder {
+    color: #9FB1BC !important;
+}
+.signUpBut{
+    background-color:#BFD7EA;
+    color:white;
+    font-weight: bold;
+}
+.signUpBut:hover{
+    color:black;
+    background-color: rgb(219, 236, 249);
+}
+.navbar-nav{
+    font-weight: bold;
+}
+/* end of navbar */
+
+/* cover */
+.cover{
+    height:800px;
+    background-image: url('../images/cover.jpg');
+    background-size: cover;
+}
+/* end of cover */

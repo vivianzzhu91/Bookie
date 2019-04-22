@@ -1,0 +1,47 @@
+.halfImg{
+    object-fit: cover;
+    width:100%;
+}
+.page{
+    height: 600px;
+}
+.center{
+    text-align: center;
+}
+.active{
+    background-color: rgb(244, 221, 139);
+    border-radius: 10px;
+    color:white;
+    font-size: 30px !important;
+}
+.inactive{
+    font-size: 30px !important;
+    border:3px solid  rgb(244, 221, 139);
+    border-radius: 10px;
+}
+body{
+    font-family: Muli;
+}
+.form-group{
+    letter-spacing: 1.5px;
+    margin-top:5% !important;
+}
+#loginForm{
+    margin-top: 50px !important;
+}
+.submitBut{
+    padding:20px;
+    color:white;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #E1D88F;
+    margin-left: 35%;
+    margin-top: 35%;
+}
+a{
+    color:inherit;
+}
+a:hover{
+    text-decoration: none;
+    color:#C1B02E;
+}

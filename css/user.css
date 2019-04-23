@@ -20,7 +20,7 @@
     border-radius: 10px;
 }
 body{
-    font-family: Muli;
+    font-family: 'Muli', sans-serif;
 }
 .form-group{
     letter-spacing: 1.5px;
@@ -44,4 +44,11 @@ a{
 a:hover{
     text-decoration: none;
     color:#C1B02E;
+}
+
+.invalid{
+    border: 2px solid #FFD4CA;
+}
+.valid{
+    border: 2px solid #E8FCB7;
 }

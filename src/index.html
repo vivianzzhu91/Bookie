@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
     <!-- custom fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Cute+Font|Muli|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cute+Font|Muli|Nunito|Lobster" rel="stylesheet">
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Homepage</title>
 </head>
 <body>
@@ -17,7 +19,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand logo" href="#">BOOKIE</a>
+        <a class="navbar-brand logo" href="index.html">BOOKIE</a>
         
         <div class="collapse navbar-collapse justify-content-between my-4" id="navbarTogglerDemo03">
             <form class="form-inline my-2 my-lg-0 mx-4" id="search">
@@ -26,26 +28,52 @@
             </form>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item mx-2 active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link" href="#">Link</a>
                 </li>
-                <button class="btn signUpBut my-sm-0 px-3" type="submit">Sign Up</button>
+                <button class="btn signUpBut my-sm-0 px-3" type="submit"><a href="signup.html">Sign Up</a></button>
             </ul>
         </div>
     </nav>
 
     <!-- cover -->
     <div class="fluid-container">
-        <div class="cover">
-            <!-- <img src="images/cover.jpg" alt="" class="coverImg"> -->
+        <div class="cover">            
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-lg-8"></div>
+                    <div class="col-lg-4">
+                        <h1 class="display-4 title">Hello Bookies</h1>
+                        <p class="lead"></p>
+                        <hr class="my-4">
+                        <h5>Welcome to the world filled with books.</h5>
+                        <h5>
+                            The creator of this website, ME, is a book lover and constantly worried
+                            about discovering meaningful books. Hope you could find what you want.
+                        </h5>
+                        <div class="text-center">
+                            <p class="lead my-4">
+                              <a class="btn signUpBut btn-lg" href="signup.html" role="button">Get Started</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+        <div id="result">
+            <div class="subtitle">
+                <h4>BEST SELLERS</h4>
+            </div>
+            <ul id="rec">
+            </ul>
         </div>
     </div>
     
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="../js/index.js"></script>
 </body>
 </html>

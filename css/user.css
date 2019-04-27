@@ -47,8 +47,18 @@ a:hover{
 }
 
 .invalid{
-    border: 2px solid #FFD4CA;
+    border: 2px solid rgb(245, 197, 186);
 }
 .valid{
     border: 2px solid #E8FCB7;
+}
+.errorM{
+    color:#FABEA2;
+}
+.errorM a{
+    color:rgb(255, 136, 109) !important;
+}
+.successM{
+    color: rgb(133, 194, 133);
+    font-size: 20px;
 }

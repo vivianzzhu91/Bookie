@@ -1,0 +1,27 @@
+.fluid-container{
+    background-color: antiquewhite;
+    color:firebrick;
+}
+#error{
+    text-align: center;
+    color:white;
+}
+#bookCover{
+    width:60%;
+    padding-left: 10%;
+    padding-top: 10%;
+}
+.sect{
+    padding-top: 10%;
+}
+.sect h3{
+    font-family: 'Gugi', cursive;
+}
+.link{
+    padding:8px;
+    border:1px solid white;
+}
+.link:hover{
+    background-color: #95B8D1;
+    color:white;
+}

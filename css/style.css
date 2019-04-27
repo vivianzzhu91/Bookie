@@ -2,8 +2,9 @@ body{
     font-family: 'Muli', sans-serif;
 }
 a{
-    color:inherit;
+    color:inherit !important;
     text-decoration: none;
+    text-decoration:none !important;
 }
 /* navbar */
 .navbar{
@@ -38,6 +39,9 @@ input::-webkit-input-placeholder {
 .navbar-nav{
     font-weight: bold;
 }
+.profile{
+    color:#BFD7EA !important;
+}
 /* end of navbar */
 
 /* cover */
@@ -57,14 +61,17 @@ input::-webkit-input-placeholder {
 }
 /* end of cover */
 /* result */
-.subtitle{
+#result{
+    background-color: rgb(228, 244, 254);
+}
+#subtitle{
     text-align: center;
-    margin-top: 2%;
+    padding-top: 2%;
     margin-bottom: 1%;
 }
-.subtitle h4{
+#subtitle h4{
     letter-spacing: 2px;
-    font-family: 'Lobster', cursive;
+    font-family: 'Gugi', cursive;
     text-decoration: underline;
 }
 ul{
@@ -75,7 +82,7 @@ ul{
 #rec li{
     position: relative;
     border-radius: 10px;
-    background-color:  #FAF5EB;
+    background-color:  #FDF0D5;
     width:20%;
 }
 .imgbox{
@@ -83,12 +90,16 @@ ul{
 }
 .rank{
     position: absolute;
-    bottom:0;
-    right:5%;
-    padding:3%;
+    bottom:2%;
+    right:10%;
+    padding:10px;
     background-color: #D4D1B4;
     color:white;
     font-weight: bold;
+}
+.titles{
+    font-weight: bold;
+    font-family: 'Gugi', cursive;
 }
 /* end of result */
 

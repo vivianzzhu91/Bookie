@@ -11,7 +11,7 @@ getBook = (title, amazonLink, rank, author) => {
     url: url,
     success: function(result) {
       let item = result.items[0];
-      console.log(item);
+      // console.log(item);
       //get related info to display on homepage
       let author = item.volumeInfo.authors[0];
       let name = item.volumeInfo.title;

@@ -39,6 +39,16 @@
                     echo $mysqli->error;
                     exit();
                 }
+                //get the user id
+                $sqlCheck = "SELECT * FROM users WHERE username ='".$_POST['username']."'";
+                $results = $mysqli->query($sqlCheck);
+                if ( !$results ) {
+                  echo $mysqli->error;
+                  exit();
+                }
+                $row = $results->fetch_assoc();
+                $userid = $row['user_id'];
+                $_SESSION['userid'] = $userid;                
                 $_SESSION['signErr'] = "";
                 $_SESSION['logged_in'] = true;
                 $_SESSION['username'] = $_POST['username'];

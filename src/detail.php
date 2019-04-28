@@ -1,8 +1,11 @@
 <?php
+require 'config/config.php';
 if (
     isset($_GET['title']) && !empty($_GET['title'])
     || isset($GET['author']) && !empty($_GET['author'])
 ) {
+
+    
     $title = $_GET['title'];
     $author = $_GET['author'];
     //What's their endpoint?
@@ -15,19 +18,19 @@ if (
     }
     //replace all white space
     $newUrl = str_replace(' ','+',$url);
-
+    
     //use curl to retrieve info of the book
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $newUrl);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-
+    
     //convert json file to php assoc array
     $response = curl_exec($ch);
     curl_close($ch);
     $response = json_decode($response,true);
     $book = $response['items'][0];
-
+    
     //retrieve all display info
     $title = $book['volumeInfo']['title'];
     $author = $book['volumeInfo']['authors'][0];
@@ -62,9 +65,82 @@ if (
         $isbn = "NO ISBN AVAILABLE";
     }
 
+    //alert add in message and clear
+    if(isset($_SESSION['favM']) && !empty($_SESSION['favM'])){
+        echo "<script type='text/javascript'>alert('".$_SESSION['favM']."');</script>";
+        $_SESSION['favM'] = "";
+    }
+    //alert remove message and clear
+    if(isset($_SESSION['removeM']) && !empty($_SESSION['removeM'])){
+        echo "<script type='text/javascript'>alert('".$_SESSION['removeM']."');</script>";
+        $_SESSION['removeM'] = "";
+    }
+    $hasUser = false;
+    $inFav = false;
+    $userFavid = 0;
+    //check if the book's in user's fav
+    if(isset($_SESSION['logged_in'])&& $_SESSION['logged_in'] == true){
+        $hasUser = true;
+        //DB connection
+        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if ( $mysqli->errno ) {
+            echo $mysqli->error;
+            exit();
+        }
+        //find the book id with given info
+        $sqlCheck = "SELECT * FROM books WHERE title ='".$title."' AND author ='".$author."' AND date = '".$date."'";
+        $results = $mysqli->query($sqlCheck);
+        if ( !$results ) {
+          echo $mysqli->error;
+          exit();
+        }
+        
+        //book in browse history
+        if($results->num_rows > 0){
+            $row = $results->fetch_assoc();
+            $bookid = $row['book_id'];
+    
+            //find the usr_fav id
+            $sqlCheck = "SELECT * FROM user_favs WHERE book_id = ". $bookid . " AND user_id = ".$_SESSION['userid'];
+            $results = $mysqli->query($sqlCheck);
+            if ( !$results ) {
+                echo $mysqli->error;
+                exit();
+            }
+            //already in favs
+            if($results->num_rows > 0){
+                $inFav = true;
+                $row = $results->fetch_assoc();
+                $userFavid = $row['user_favs_id'];
+            }
+            else{
+                $inFav = false;
+            }
+        }
+        //book not in browse history, insert it into books
+        else{
+            //insert into the book table
+            $sqlCheck = "INSERT INTO books(title,author,date)
+            VALUES('".$title."', '".$author."','".$date."')";
+            $results = $mysqli->query($sqlCheck);
+            if ( !$results ) {
+                echo $mysqli->error;
+                exit();
+            }
+        }
+
+        // close the database
+        $mysqli->close();
+
+    }
+    else{
+        $hasUser = false;
+    }
+
 } else {
     $error = "No Such Detail Page For This Book. Try Valid Input.";
 }
+
 
 ?>
 <html lang="en">
@@ -75,6 +151,7 @@ if (
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- stylesheet -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/detail.css">
     <!-- custom fonts -->
@@ -104,8 +181,14 @@ if (
                     </div>
                     <div class="col-lg-7">
                         <div class="sect">
-                            <h3><?php echo $title ?></h3>
-                            <h5>Author: <?php echo $author?></h5>
+                            <!-- fav icon -->
+                            <?php if ($hasUser == false || $inFav == false):?>
+                                <h3 id="title"><?php echo $title ?> <i class="far fa-heart mx-2 fav" id="addFav"></i></h3>
+                            <?php else:?>
+                                <h3 id="title"><?php echo $title ?> <i class="fas fa-heart mx-2 fav" id="removeFav"></i></h3>
+                            <?php endif;?>
+
+                            <h5 id="author">Author: <?php echo $author?></h5>
                             <p>Publisher: <?php echo $publisher?></p>
                             <p>Date: <?php echo $date?></p>
                             <?php if(isset($noRating)&& !empty($noRating)):?>
@@ -124,12 +207,30 @@ if (
                             </div>
                             <p>Description: </p>
                             <p><?php echo $descript?></p>
+                            <form method="POST" action="addFav.php" id="addForm">
+                                <input type="hidden" value="<?php echo $title?>" name="title">
+                                <input type="hidden" value="<?php echo $author?>" name="author">
+                                <input type="hidden" value="<?php echo $date?>" name="date">
+                            </form>
+                            <form method="POST" action="removeFav.php" id="removeForm">
+                                <input type="hidden" value="<?php echo $title?>" name="title">
+                                <input type="hidden" value="<?php echo $author?>" name="author">
+                                <input type="hidden" value="<?php echo $userFavid?>" name="userFavid">
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         <?php endif; ?>
     </div>
+    <script>
+        $("#addFav").click( () => {
+            $("#addForm").submit();
+        });
+        $("#removeFav").click( () => {
+            $("#removeForm").submit();
+        });
+    </script>
 </body>
 
 </html>

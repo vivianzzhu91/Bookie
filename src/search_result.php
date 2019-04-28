@@ -7,7 +7,7 @@
       $title = $_GET['search'];
       //What's their endpoint?
       define('GOOGLE_BOOKS_API', 'https://www.googleapis.com/books/v1/volumes');
-      $url = GOOGLE_BOOKS_API . "?q=" . $title . "&key=AIzaSyCa7VNQhw7vHTefuAK67TNcj_gpUWnshQs&orderBy=relevance&maxResults=10";
+      $url = GOOGLE_BOOKS_API . "?q=" . $title . "&key=AIzaSyCa7VNQhw7vHTefuAK67TNcj_gpUWnshQs&orderBy=relevance";
       //replace all white space
       $newUrl = str_replace(' ','+',$url);
 

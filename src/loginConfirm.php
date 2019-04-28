@@ -1,4 +1,5 @@
 <?php
+    require 'config/config.php';
     if(!isset($_POST['username']) || empty($_POST['username'])
     || !isset($_POST['pass']) || empty($_POST['pass'])){
             $error = "All required Information Is Not Filled Yet.";
@@ -6,7 +7,6 @@
     else{
       //open my sql to validate
       
-      require 'config/config.php';
       // DB Connection
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         if ( $mysqli->errno ) {
@@ -29,13 +29,15 @@
                 or <a href=\"signup.php\">sign up</a> with a different username</p>";
                 header('Location:login.php');
             }
-            //insert the new user into the user table
+            // get the userid and all info
             else{
         
               $row = $results->fetch_assoc();
               $cPass = $row['password'];
               if($cPass == $_POST['pass']){
-                  
+                
+                $userid = $row['user_id'];
+                $_SESSION['userid'] = $userid;
                 $_SESSION['logged_in'] = true;
                 $_SESSION['username'] = $_POST['username'];
                 $_SESSION['logErr'] = "";
@@ -101,7 +103,6 @@
             </button>
           </div>
           <div class="my-4">
-
           </div>
         </div>
       </div>

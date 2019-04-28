@@ -62,7 +62,7 @@
               <div class="form-group my-3">
                 <label for="pass" class="my-3">PASSWORD</label>
                 <input
-                  type="text"
+                  type="password"
                   class="form-control"
                   id="pass"
                   placeholder="Give Your Password"

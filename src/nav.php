@@ -46,7 +46,7 @@
             </button>
         <?php else:?>
             <li class="nav-item mx-2">
-                <a class="nav-link profile" href="profile.php"><?php echo $_SESSION['username']?></a>
+                <a class="nav-link profile" href="profile.php?i=<?php echo $_SESSION['userid']?>"><?php echo $_SESSION['username']?></a>
             </li>
             <button class="btn signUpBut my-sm-0 px-3 mx-2" type="submit">
                 <a href="logout.php">Log Out</a>

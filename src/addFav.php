@@ -13,15 +13,18 @@
         }
 
         //find the book id with given info
-        $sqlCheck = "SELECT * FROM books WHERE 
-          title ='".$_POST['title']."' AND author ='".$_POST['author']."' AND date ='".$_POST['date']."'";
+        $sqlCheck = "SELECT * FROM books WHERE title ='".$_POST['title']."' AND author ='".$_POST['author']."' AND date ='".$_POST['date']."';";
         $results = $mysqli->query($sqlCheck);
+        var_dump($results);
+        echo $sqlCheck;
         if ( !$results ) {
           echo $mysqli->error;
           exit();
         }
+        echo $results->num_rows;
         $row = $results->fetch_assoc();
         $bookid = $row['book_id'];
+        echo $bookid;
 
         //insert into the user_fav table
         $sqlAdd = "INSERT INTO user_favs(book_id,user_id)

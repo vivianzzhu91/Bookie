@@ -1,0 +1,30 @@
+.center{
+  text-align: center;
+  font-family: 'Cute Font', cursive;
+  font-size: 60px;
+}
+.error{
+  text-align: center;
+}
+.username{
+  color:#F08080;
+}
+.fluid-container{
+  background-color: #FDEDEC;
+}
+.results li{
+  border: 2px solid #D7BDE2;
+  border-radius: 10px;
+  padding:10px;
+}
+.rec{
+  text-align: center;
+  font-family: 'Cute Font', cursive;
+  font-size: 50px;
+  color:#F4D03F ;
+}
+#profile li:hover{
+  background-color: #C19CAE;
+  color:white;
+  font-weight: bold;
+}

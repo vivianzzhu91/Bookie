@@ -35,7 +35,6 @@ if (
     $title = $book['volumeInfo']['title'];
     $author = $book['volumeInfo']['authors'][0];
     $publisher = $book['volumeInfo']['publisher'];
-    $date = $book['volumeInfo']['publishedDate'];
     $descript = $book['volumeInfo']['description'];
     $descript = str_replace('\\','', $descript);
     $image = $book['volumeInfo']['imageLinks']['thumbnail'];
@@ -63,6 +62,13 @@ if (
     }
     else{
         $isbn = "NO ISBN AVAILABLE";
+    }
+
+    if(array_key_exists('publishedDate', $book['volumeInfo'])){
+        $date = $book['volumeInfo']['publishedDate'];
+    }
+    else{
+        $date = "NO DATE";
     }
 
     //alert add in message and clear

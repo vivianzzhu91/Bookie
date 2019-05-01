@@ -92,4 +92,3 @@ getList = () => {
   });
 };
 this.getList();
-

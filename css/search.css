@@ -5,3 +5,20 @@
   text-align: center;
   color:#D98880;
 }
+.recItem{
+  width:18%;
+}
+.recItem img{
+  width:50%;
+  height:80%;
+}
+.rectitle{
+  text-align: center;
+  padding-top: 2%;
+  margin-bottom: 1%;
+}
+.rectitle h4{
+  letter-spacing: 2px;
+  font-family: 'Gugi', cursive;
+  text-decoration: underline;
+}

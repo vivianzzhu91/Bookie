@@ -84,6 +84,12 @@
                   else{
                     $author = 'No Author';
                   }
+                  if(array_key_exists('publishedDate', $book['volumeInfo'])){
+                    $date = $book['volumeInfo']['publishedDate'];
+                  }
+                  else{
+                    $date = 'No Date';
+                  }
                 ?>
                 <a class="titles" 
                   href='detail.php?title=<?php echo $book['volumeInfo']['title'];?>&author=<?php echo $author?>&l=https://www.amazon.com/s?k=<?php echo $book['volumeInfo']['title'];?>'>
@@ -91,7 +97,7 @@
                 </a>
 
                 <h6><?php echo $author;?></h6>
-                <p><?php echo $book['volumeInfo']['publishedDate'];?></p>
+                <p><?php echo $date;?></p>
                 <?php if(isset($noRating)&& !empty($noRating)):?>
                     <p><?php echo $noRating?></p>
                 <?php else:?>
@@ -101,7 +107,10 @@
               </li>
             <?php endforeach;?>
           </ul>
-        </div>
+          <div class="rectitle"> </div>
+          <div id="recContent" class="my-4">
+          </div>
+        </div>  
       <?php endif;?>
     </div>
 
@@ -115,5 +124,6 @@
       integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
       crossorigin="anonymous"
     ></script>
+    <script src="../js/search.js"></script>
   </body>
 </html>

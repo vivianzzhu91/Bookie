@@ -16,28 +16,30 @@
       exit();
     }
     if($results->num_rows == 0){
-      $error = "No Existing User Profile";
+      $error = "No Existing User Info";
     }
-
-
-    //get user_favs from userid
-    //find the book id with given info
-    $sqlCheck = "SELECT * FROM user_favs 
-    JOIN books
-      ON user_favs.book_id = books.book_id
-    WHERE user_id=".$_GET['i'];
-    $results = $mysqli->query($sqlCheck);
-    if ( !$results ) {
-      echo $mysqli->error;
-      exit();
+    else{
+      //get user_favs from userid
+      //find the book id with given info
+      $sqlCheck = "SELECT * FROM user_favs 
+      JOIN books
+        ON user_favs.book_id = books.book_id
+      WHERE user_id=".$_GET['i'];
+      $results = $mysqli->query($sqlCheck);
+      if ( !$results ) {
+        echo $mysqli->error;
+        exit();
+      }
+      if($results->num_rows == 0){
+        $status = "No Favorites Yet";
+      }
+  
+      //check results
+      $noFavs = "";
+      if($results->num_rows == 0){
+        $noFavs = "Currently No Favorites";
+      }
     }
-
-    //check results
-    $noFavs = "";
-    if($results->num_rows == 0){
-      $noFavs = "Currently No Favorites";
-    }
-
     // close the database
     $mysqli->close();
   }
@@ -81,26 +83,30 @@
         <div id="profile">
           <p class="center pt-4 mb-2">Hello <span class="username"><?php echo $_SESSION['username'];?></span></p>
           <p class="rec">Here's Your Favorite Bookies</p>
-          <ul class="results pb-4 mr-3">
-            <div class="row">
-              <?php while($row = $results->fetch_assoc()):?>
-              <div class="col-lg-9">
-                  <div class="list">
-                    <a href="detail.php?title=<?php echo $row['title']?>&author=<?php echo $row['author']?>&l=https://www.amazon.com/s?k=<?php echo $row['title'];?>">
-                      <li class="my-2 mx-2">
-                        <h4><?php echo $row['title']?> By <?php echo $row['author']?> <?php echo $row['date']?></h4>
-                      </li>
-                    </a>
+          <?php if(isset($status) && !empty($status)):?>
+            <p class='center pt-2 mb-2'><?php echo $status;?></p>
+          <?php else:?>
+            <ul class="results pb-4 mr-3">
+              <div class="row">
+                <?php while($row = $results->fetch_assoc()):?>
+                <div class="col-lg-9">
+                    <div class="list">
+                      <a href="detail.php?title=<?php echo $row['title']?>&author=<?php echo $row['author']?>&l=https://www.amazon.com/s?k=<?php echo $row['title'];?>">
+                        <li class="my-2 mx-2">
+                          <h4><?php echo $row['title']?> By <?php echo $row['author']?> <?php echo $row['date']?></h4>
+                        </li>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              <div class="col-lg-3">
-                  <div>
-                    <h5 class="py-4 px-2"><?php echo $row['time'];?></h5>
+                <div class="col-lg-3">
+                    <div>
+                      <h5 class="py-4 px-2"><?php echo $row['time'];?></h5>
+                    </div>
                   </div>
-                </div>
-              <?php endwhile;?>
-            </div>
-          </ul>
+                <?php endwhile;?>
+              </div>
+            </ul>
+          <?php endif;?>
         </div>
       <?php endif;?>
     </div>
